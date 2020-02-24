@@ -14,24 +14,24 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @ToString
-public class PowerStats extends EntityBean {
+public class PowerStats extends AbstractEntity {
 
-
-    @NotNull(message = "strength may not be blank")
-    @Column(name = "strength")
-    private Integer strength;
-
-    @NotNull(message = "agility may not be blank")
+    @NotNull
     @Column(name = "agility")
     private Integer agility;
 
-    @NotNull(message = "dexterity may not be blank")
+    @NotNull
     @Column(name = "dexterity")
     private Integer dexterity;
 
-    @NotNull(message = "intelligence may not be blank")
+    @NotNull
     @Column(name = "intelligence")
     private Integer intelligence;
+
+    @NotNull
+    @Column(name = "strength")
+    private Integer strength;
+
 
 
 }
