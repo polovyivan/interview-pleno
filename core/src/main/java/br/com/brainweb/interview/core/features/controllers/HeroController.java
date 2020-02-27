@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,14 +26,14 @@ public class HeroController {
 
 
     @PostMapping
-    public ResponseEntity<Void> save(@RequestBody HeroRequestDTO heroRequestDTO) {
+    public ResponseEntity<Void> save(@Valid @RequestBody HeroRequestDTO heroRequestDTO) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Location", "/heroes/" + heroService.save(heroRequestDTO).toString());
         return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
     }
 
     @RequestMapping(path = "/{uuid}", method = PATCH, consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Void> update(@PathVariable String uuid, @RequestBody HeroRequestDTO heroRequestDTO) {
+    public ResponseEntity<Void> update(@PathVariable String uuid, @Valid @RequestBody HeroRequestDTO heroRequestDTO) {
         heroService.update(uuid, heroRequestDTO);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
