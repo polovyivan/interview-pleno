@@ -1,7 +1,6 @@
 package br.com.brainweb.interview.core.features.services;
 
 import br.com.brainweb.interview.core.features.repositories.HeroRepository;
-import br.com.brainweb.interview.core.features.repositories.PowerStatsRepository;
 import br.com.brainweb.interview.model.dtos.request.HeroRequestDTO;
 import br.com.brainweb.interview.model.dtos.response.HeroResponseDTO;
 import br.com.brainweb.interview.model.entities.Hero;
@@ -32,9 +31,6 @@ class HeroServiceTest {
 
     @Autowired
     private HeroRepository heroRepository;
-
-    @Autowired
-    private PowerStatsRepository powerStatsRepository;
 
     private static HeroRequestDTO heroRequestDTO;
 
@@ -90,20 +86,5 @@ class HeroServiceTest {
 
     }
 
-    @Test
-    @Commit
-    void deleteCascade() {
-        // when hero saved
-        Hero hero = createHero();
-        Hero save = heroRepository.save(hero);
-        UUID powerStatsId = hero.getPowerStats().getId();
-        // deleted
-        heroService.delete(save.getId().toString());
-        // then
-        Optional<PowerStats> powerStatsDeleted = powerStatsRepository.findById(powerStatsId);
-
-        assertTrue(powerStatsDeleted.isEmpty());
-
-    }
 
 }

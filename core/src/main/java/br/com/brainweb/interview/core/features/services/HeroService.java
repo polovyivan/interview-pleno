@@ -111,7 +111,7 @@ public class HeroService {
 
     private Hero fetchFromDB(UUID uuid) {
         return heroRepository.findById(uuid)
-                .orElseThrow(() -> new HeroNotFoundException(uuid.toString()));
+                .orElseThrow(() -> new HeroNotFoundException(uuid));
     }
 
     private Optional<List<Hero>> fetchFromDB(String name) {
