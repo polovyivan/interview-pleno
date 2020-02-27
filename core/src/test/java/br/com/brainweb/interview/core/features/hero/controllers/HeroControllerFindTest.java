@@ -34,11 +34,8 @@ public class HeroControllerFindTest {
     @MockBean
     private HeroService heroService;
 
-    private static final Locale BRAZIL = new Locale("pt", "BR");
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", BRAZIL);
-
     private HeroResponseDTO heroResponseDTO = createHeroResponseDTO();
-    private PowerStatsResponseDTO powerStatsResponseDTO = heroResponseDTO.getPowerStats();
+
 
     @Test
     public void shouldFetchHeroById() throws Exception {
