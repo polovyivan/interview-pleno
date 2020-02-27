@@ -1,7 +1,6 @@
 package br.com.brainweb.interview.core.features.hero.entities;
 
 import br.com.brainweb.interview.core.features.repositories.HeroRepository;
-import br.com.brainweb.interview.core.features.repositories.PowerStatsRepository;
 import br.com.brainweb.interview.model.entities.Hero;
 import br.com.brainweb.interview.model.entities.PowerStats;
 import org.junit.FixMethodOrder;
@@ -18,6 +17,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 import static br.com.brainweb.interview.core.features.TestUtils.createHero;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
@@ -34,8 +34,6 @@ public class AbstractEntityTest {
     @Autowired
     private HeroRepository heroRepository;
 
-    @Autowired
-    private PowerStatsRepository powerStatsRepository;
 
     private static final long MAX_LATENCY_MIN = 3;
 
@@ -62,11 +60,13 @@ public class AbstractEntityTest {
     @Test
     public void uuidTest() {
         // id is UUID type
-        ps = hero.getPowerStats();
-        PowerStats psSaved = powerStatsRepository.save(ps);
-        assertTrue(psSaved.getId()
-                .toString()
-                .matches(UUID_REGEX));
+        assertAll(() -> assertTrue(hero.getPowerStats().getId()
+                        .toString()
+                        .matches(UUID_REGEX)),
+                () -> assertTrue(hero.getId()
+                        .toString()
+                        .matches(UUID_REGEX)));
+
 
     }
 }
